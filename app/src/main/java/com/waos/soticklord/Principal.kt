@@ -50,7 +50,7 @@ class Principal : AppCompatActivity() {
 
     //metodos
 
-    fun Crear_Diccionario(){
+    fun Crear_Diccionario() {
         Diccionario_Tropas[1] = Tropa("Arquero", 100, R.drawable.arquero_tropa)
         Diccionario_Tropas[2] = Tropa("Mago", 80, R.drawable.espadachin_tropa)
         Diccionario_Tropas[3] = Tropa("Gigante", 200, R.drawable.gigante_tropa)
@@ -62,13 +62,16 @@ class Principal : AppCompatActivity() {
         Diccionario_Reyes[4] = Tropa("Rey Espadachin", 200, R.drawable.rey_espadachin)
 
     }
+
     fun Ocultar_imagenes() {
         for (img in imagenes) {
             img.visibility = View.INVISIBLE
         }
         imagenes[indice_waos].visibility = View.VISIBLE
     }
-    fun Boton_siguiente_Seleccion(view: View) {
+
+    // Botones para q aparesca la imagen respectiva en el view grande
+    fun Boton_siguiente_Mostrar(view: View) {
         val imagenCentral = findViewById<ImageView>(R.id.Imagen_Central)
 
         if (indice_waos >= 1 && indice_waos <= 5) {
@@ -90,92 +93,110 @@ class Principal : AppCompatActivity() {
         }
 
     }
-    fun Boton_Anterior_Seleccion(){
+
+    fun Boton_Anterior_Mostrar(view: View) {
+        val imagenCentral = findViewById<ImageView>(R.id.Imagen_Central)
+
+        if (indice_waos >= 1 && indice_waos <= 5) {
+
+            val seleccionada = Diccionario_Tropas[indice_tropas]
+            imagenCentral.setImageResource(seleccionada?.imagen ?: R.drawable.tropa_default)
+            indice_tropas = indice_tropas - 1
+            if (indice_tropas < 0)
+                indice_tropas = 5
+        }
+
+        if (indice_waos == 0) {
+            val seleccionada = Diccionario_Reyes[indice_reyes]
+            imagenCentral.setImageResource(seleccionada?.imagen ?: R.drawable.tropa_default)
+            indice_reyes = indice_reyes - 1
+            if (indice_reyes < 0)
+                indice_reyes = 5
+        }
+    }
+        //indice de la tropa para asignarle un personaje avanzar
+        fun Boton_siguiente_tropa(view: View) {
+            if (indice_waos == 5) {
+                imagenes[indice_waos].visibility = View.INVISIBLE
+                indice_waos = 4
+                imagenes[indice_waos].visibility = View.VISIBLE
+                return
+            }
+            if (indice_waos == 4) {
+                imagenes[indice_waos].visibility = View.INVISIBLE
+                indice_waos = 3
+                imagenes[indice_waos].visibility = View.VISIBLE
+                return
+            }
+            if (indice_waos == 3) {
+                imagenes[indice_waos].visibility = View.INVISIBLE
+                indice_waos = 2
+                imagenes[indice_waos].visibility = View.VISIBLE
+                return
+            }
+            if (indice_waos == 2) {
+                imagenes[indice_waos].visibility = View.INVISIBLE
+                indice_waos = 1
+                imagenes[indice_waos].visibility = View.VISIBLE
+                return
+            }
+            if (indice_waos == 1) {
+                imagenes[indice_waos].visibility = View.INVISIBLE
+                indice_waos = 0
+                imagenes[indice_waos].visibility = View.VISIBLE
+                return
+            }
+            if (indice_waos == 0) {
+                imagenes[indice_waos].visibility = View.INVISIBLE
+                indice_waos = 5
+                imagenes[indice_waos].visibility = View.VISIBLE
+                return
+            }
+
+        }
+
+        //indice de la tropa para asignarle un personaje retroceder
+        fun Boton_Anterior_tropa(view: View) {
+            if (indice_waos == 4) {
+                imagenes[indice_waos].visibility = View.INVISIBLE
+                indice_waos = 5
+                imagenes[indice_waos].visibility = View.VISIBLE
+                return
+            }
+            if (indice_waos == 3) {
+                imagenes[indice_waos].visibility = View.INVISIBLE
+                indice_waos = 4
+                imagenes[indice_waos].visibility = View.VISIBLE
+                return
+            }
+            if (indice_waos == 2) {
+                imagenes[indice_waos].visibility = View.INVISIBLE
+                indice_waos = 3
+                imagenes[indice_waos].visibility = View.VISIBLE
+                return
+            }
+            if (indice_waos == 1) {
+                imagenes[indice_waos].visibility = View.INVISIBLE
+                indice_waos = 2
+                imagenes[indice_waos].visibility = View.VISIBLE
+                return
+            }
+            if (indice_waos == 0) {
+                imagenes[indice_waos].visibility = View.INVISIBLE
+                indice_waos = 1
+                imagenes[indice_waos].visibility = View.VISIBLE
+                return
+            }
+            if (indice_waos == 5) {
+                imagenes[indice_waos].visibility = View.INVISIBLE
+                indice_waos = 0
+                imagenes[indice_waos].visibility = View.VISIBLE
+                return
+            }
+
+        }
 
     }
 
-    //indice de la tropa para asignarle un personaje avanzar
-    fun Boton_siguiente_tropa(view: View){
-        if (indice_waos == 5){
-            imagenes[indice_waos].visibility = View.INVISIBLE
-            indice_waos = 4
-            imagenes[indice_waos].visibility = View.VISIBLE
-            return
-        }
-        if (indice_waos == 4){
-            imagenes[indice_waos].visibility = View.INVISIBLE
-            indice_waos = 3
-            imagenes[indice_waos].visibility = View.VISIBLE
-            return
-        }
-        if (indice_waos == 3){
-            imagenes[indice_waos].visibility = View.INVISIBLE
-            indice_waos = 2
-            imagenes[indice_waos].visibility = View.VISIBLE
-            return
-        }
-        if (indice_waos == 2){
-            imagenes[indice_waos].visibility = View.INVISIBLE
-            indice_waos = 1
-            imagenes[indice_waos].visibility = View.VISIBLE
-            return
-        }
-        if (indice_waos == 1){
-            imagenes[indice_waos].visibility = View.INVISIBLE
-            indice_waos = 0
-            imagenes[indice_waos].visibility = View.VISIBLE
-            return
-        }
-        if (indice_waos == 0){
-            imagenes[indice_waos].visibility = View.INVISIBLE
-            indice_waos = 5
-            imagenes[indice_waos].visibility = View.VISIBLE
-            return
-        }
-
-    }
-    //retroceder
-    fun Boton_Anterior_tropa(view: View){
-        if (indice_waos == 5){
-            imagenes[indice_waos].visibility = View.INVISIBLE
-            indice_waos = 1
-            imagenes[indice_waos].visibility = View.VISIBLE
-            return
-        }
-        if (indice_waos == 4){
-            imagenes[indice_waos].visibility = View.INVISIBLE
-            indice_waos = 5
-            imagenes[indice_waos].visibility = View.VISIBLE
-            return
-        }
-        if (indice_waos == 3){
-            imagenes[indice_waos].visibility = View.INVISIBLE
-            indice_waos = 4
-            imagenes[indice_waos].visibility = View.VISIBLE
-            return
-        }
-        if (indice_waos == 2){
-            imagenes[indice_waos].visibility = View.INVISIBLE
-            indice_waos = 3
-            imagenes[indice_waos].visibility = View.VISIBLE
-            return
-        }
-        if (indice_waos == 1){
-            imagenes[indice_waos].visibility = View.INVISIBLE
-            indice_waos = 2
-            imagenes[indice_waos].visibility = View.VISIBLE
-            return
-        }
-        if (indice_waos == 0){
-            imagenes[indice_waos].visibility = View.INVISIBLE
-            indice_waos = 1
-            imagenes[indice_waos].visibility = View.VISIBLE
-            return
-        }
-
-    }
 
 
-
-
-}
