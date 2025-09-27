@@ -93,7 +93,7 @@
         app:srcCompat="@drawable/tropa_default" />
 
     <ImageView
-        android:id="@+id/imageView14"
+        android:id="@+id/Imagen_Central"
         android:layout_width="205dp"
         android:layout_height="132dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -109,6 +109,7 @@
         android:layout_width="86dp"
         android:layout_height="34dp"
         android:backgroundTint="#000000"
+        android:onClick="Boton_siguiente_Seleccion"
         android:text="Siguiente"
         android:textColor="#FFFFFF"
         android:textSize="8sp"
@@ -256,6 +257,7 @@
         android:layout_height="27dp"
         android:adjustViewBounds="true"
         android:backgroundTint="#00FFFFFF"
+        android:onClick="Boton_siguiente_tropa"
         android:padding="0dp"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -272,6 +274,7 @@
         android:layout_height="27dp"
         android:adjustViewBounds="true"
         android:backgroundTint="#00FFFFFF"
+        android:onClick="Boton_Anterior_tropa"
         android:padding="0dp"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -280,6 +283,78 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.046"
+        app:srcCompat="@drawable/boton2" />
+
+    <ImageView
+        android:id="@+id/Cinco"
+        android:layout_width="31dp"
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.874"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.146"
+        app:srcCompat="@drawable/boton2" />
+
+    <ImageView
+        android:id="@+id/Cuatro"
+        android:layout_width="31dp"
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.874"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.506"
+        app:srcCompat="@drawable/boton2" />
+
+    <ImageView
+        android:id="@+id/Tres"
+        android:layout_width="31dp"
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.874"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.853"
+        app:srcCompat="@drawable/boton2" />
+
+    <ImageView
+        android:id="@+id/Uno"
+        android:layout_width="31dp"
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.705"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.307"
+        app:srcCompat="@drawable/boton2" />
+
+    <ImageView
+        android:id="@+id/Dos"
+        android:layout_width="31dp"
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.705"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.682"
+        app:srcCompat="@drawable/boton2" />
+
+    <ImageView
+        android:id="@+id/Cero"
+        android:layout_width="31dp"
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.542"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.496"
         app:srcCompat="@drawable/boton2" />
 
 
