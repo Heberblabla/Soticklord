@@ -6,8 +6,10 @@ import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import Data.Tropa
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 
 
 class Principal : AppCompatActivity() {
@@ -26,6 +28,11 @@ class Principal : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_principal)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        val controller = WindowInsetsControllerCompat(window, window.decorView)
+        controller.hide(WindowInsetsCompat.Type.systemBars())
+        controller.systemBarsBehavior =
+            WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
 
         // AHORA ya puedes hacer findViewById
         imagenes = arrayListOf(
@@ -70,7 +77,7 @@ class Principal : AppCompatActivity() {
         imagenes[indice_waos].visibility = View.VISIBLE
     }
 
-    // Botones para q aparesca la imagen respectiva en el view grande
+    // Boton para q aparesca la siquiente imagen respectiva en el view grande
     fun Boton_siguiente_Mostrar(view: View) {
         val imagenCentral = findViewById<ImageView>(R.id.Imagen_Central)
 
@@ -93,7 +100,7 @@ class Principal : AppCompatActivity() {
         }
 
     }
-
+    // Boton para q aparesca la siquiente imagen respectiva en el view grande
     fun Boton_Anterior_Mostrar(view: View) {
         val imagenCentral = findViewById<ImageView>(R.id.Imagen_Central)
 
@@ -114,8 +121,10 @@ class Principal : AppCompatActivity() {
                 indice_reyes = 5
         }
     }
-        //indice de la tropa para asignarle un personaje avanzar
-        fun Boton_siguiente_tropa(view: View) {
+
+
+    //indice de la tropa para asignarle un personaje / avanzar
+    fun Boton_siguiente_tropa(view: View) {
             if (indice_waos == 5) {
                 imagenes[indice_waos].visibility = View.INVISIBLE
                 indice_waos = 4
@@ -155,8 +164,8 @@ class Principal : AppCompatActivity() {
 
         }
 
-        //indice de la tropa para asignarle un personaje retroceder
-        fun Boton_Anterior_tropa(view: View) {
+    //indice de la tropa para asignarle un personaje /retroceder
+    fun Boton_Anterior_tropa(view: View) {
             if (indice_waos == 4) {
                 imagenes[indice_waos].visibility = View.INVISIBLE
                 indice_waos = 5
