@@ -14,7 +14,7 @@ import androidx.core.view.WindowInsetsControllerCompat
 
 class Principal : AppCompatActivity() {
     //atributos
-    var indice_waos = 5
+    var indice_waos = 57
     var indice_reyes = 1
     var indice_tropas = 1
 
