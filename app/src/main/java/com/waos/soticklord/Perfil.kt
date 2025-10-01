@@ -1,6 +1,8 @@
 package com.waos.soticklord
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import com.waos.soticklord.Iniciar_Sesion
 
 class Perfil : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,5 +36,13 @@ class Perfil : AppCompatActivity() {
 
 
 
+
+
     }
+    fun entrar(view: View){
+        val intent = Intent(this, Principal::class.java)
+        startActivity(intent)
+        
+    }
+
 }

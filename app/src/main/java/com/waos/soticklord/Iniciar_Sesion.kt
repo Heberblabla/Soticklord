@@ -1,9 +1,11 @@
 package com.waos.soticklord
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +22,7 @@ class Iniciar_Sesion : AppCompatActivity() {
     private val supabaseUrl = "https://zropeiibzqefzjrkdzzp.supabase.co"
     private val apiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpyb3BlaWlienFlZnpqcmtkenpwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTkwMTc1NDYsImV4cCI6MjA3NDU5MzU0Nn0.ZJWqkOAbTul-RwIQrirajUSVdyI1w9Kh3kjek0vFMw8" // 👈 tu key pública de Supabase
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -39,19 +42,24 @@ class Iniciar_Sesion : AppCompatActivity() {
 
         val editNombre = findViewById<EditText>(R.id.edit_nombre)
         val editPassword = findViewById<EditText>(R.id.edit_password)
-        val btnIniciar = findViewById<Button>(R.id.Iniciar)
+        val btnimagen = findViewById<ImageButton>(R.id.Iniciarwaza)
+
         val btnRegistrar = findViewById<Button>(R.id.Registrarse)
 
-        btnIniciar.setOnClickListener {
+
+        btnimagen.setOnClickListener {
             val usuario = editNombre.text.toString()
             val password = editPassword.text.toString()
             validarUsuario(usuario, password)
         }
 
         btnRegistrar.setOnClickListener {
-            val intent = Intent(this, Perfil::class.java)
+            val intent = Intent(this, Principal::class.java)
             startActivity(intent)
         }
+
+
+
     }
 
     private fun validarUsuario(nombre: String, password: String) {

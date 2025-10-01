@@ -1,5 +1,6 @@
 package com.waos.soticklord
 
+
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -43,6 +44,7 @@ class Principal : AppCompatActivity() {
             findViewById(R.id.Cuatro),
             findViewById(R.id.Cinco)
         )
+
 
         Crear_Diccionario()
         Ocultar_imagenes()
