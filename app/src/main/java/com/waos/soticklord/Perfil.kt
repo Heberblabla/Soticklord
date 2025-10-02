@@ -20,6 +20,10 @@ class Perfil : AppCompatActivity() {
     private val client = OkHttpClient()
     private val supabaseUrl = "https://zropeiibzqefzjrkdzzp.supabase.co"
     private val apiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpyb3BlaWlienFlZnpqcmtkenpwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTkwMTc1NDYsImV4cCI6MjA3NDU5MzU0Nn0.ZJWqkOAbTul-RwIQrirajUSVdyI1w9Kh3kjek0vFMw8" //  key pública
+    var misMonedas = 0
+    var miExperiencia = 0
+    var misMedallas = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,20 +48,59 @@ class Perfil : AppCompatActivity() {
         val idJugador = intent.getIntExtra("ID_JUGADOR", -1)
 
         if (idJugador != -1) {
-            // Aquí puedes hacer una consulta a tu BD o API con el idJugador
-            // y llenar los TextView con la info del jugador (nombre, monedas, tropas, etc.)
-            // Ejemplo ficticio:
-            println("ID del jugador recibido: $idJugador")
+            val numero = idJugador.toInt()
+
+            // aquí llamas la función y usas el callback
+            obtenerDatosJugador(numero) { monedas, experiencia, medallas ->
+
+                // Aquí ya puedes asignar a tus variables
+                misMonedas = monedas
+                miExperiencia = experiencia
+                misMedallas = medallas
+                asignar_datos_principales()
+            }
+
+
         } else {
-            println("Error: no se recibió el ID del jugador")
+            println("Error: no se recibió    el ID del jugador")
         }
+
+        asignar_datos_principales()
     }
+
+    private fun asignar_datos_principales(){
+        val Nivel = findViewById<TextView>(R.id.Nivel_General)
+        val nuevo =  calcularNivel(miExperiencia)
+        Nivel.text = nuevo.toString()
+        val monedas = findViewById<TextView>(R.id.Monedas)
+        monedas.text = misMonedas.toString()
+        val Medallas = findViewById<TextView>(R.id.Medallas)
+        Medallas.text = misMedallas.toString()
+    }
+
+    private fun calcularNivel(experiencia: Int): Int {
+        var expRestante = experiencia
+        var nivel = 1
+        var expNecesaria = 1000
+
+        while (expRestante >= expNecesaria) {
+            expRestante -= expNecesaria
+            nivel++
+
+            // a partir del nivel 2 se aumenta 25%
+            expNecesaria = (expNecesaria * 1.25).toInt()
+        }
+
+        return nivel
+    }
+
+
 
     fun entrar(view: View) {
         val intent = Intent(this, Principal::class.java)
         startActivity(intent)
     }
-    private fun obtenerDatosJugador(idJugador: Int, callback: (Int, Int, Int) -> Unit) {
+    fun obtenerDatosJugador(idJugador: Int, callback: (Int, Int, Int) -> Unit) {
         val url = "$supabaseUrl/rest/v1/jugadores?id_jugador=eq.$idJugador"
 
         val request = Request.Builder()
