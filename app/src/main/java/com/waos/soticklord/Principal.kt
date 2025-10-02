@@ -15,7 +15,7 @@ import androidx.core.view.WindowInsetsControllerCompat
 
 class Principal : AppCompatActivity() {
     //atributos
-    var indice_waos = 57
+    var indice_waos = 0
     var indice_reyes = 1
     var indice_tropas = 1
 
@@ -34,6 +34,11 @@ class Principal : AppCompatActivity() {
         controller.hide(WindowInsetsCompat.Type.systemBars())
         controller.systemBarsBehavior =
             WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
 
         // AHORA ya puedes hacer findViewById
         imagenes = arrayListOf(
@@ -47,13 +52,8 @@ class Principal : AppCompatActivity() {
 
 
         Crear_Diccionario()
-        Ocultar_imagenes()
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+        Ocultar_imagenes()
     }
 
 

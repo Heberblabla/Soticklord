@@ -89,6 +89,7 @@
         android:id="@+id/Iniciarwaza"
         android:layout_width="53dp"
         android:layout_height="32dp"
+        android:onClick="cargar_datos"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.844"

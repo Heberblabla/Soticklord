@@ -3,6 +3,7 @@ package com.waos.soticklord
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -17,11 +18,14 @@ import okhttp3.*
 import java.io.IOException
 
 class Iniciar_Sesion : AppCompatActivity() {
+    private lateinit var edit_nombre: EditText
+    private lateinit var edit_password: EditText
 
+    var usuario: String = "zzz"
+    var password: String = "123"
     private val client = OkHttpClient()
     private val supabaseUrl = "https://zropeiibzqefzjrkdzzp.supabase.co"
-    private val apiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpyb3BlaWlienFlZnpqcmtkenpwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTkwMTc1NDYsImV4cCI6MjA3NDU5MzU0Nn0.ZJWqkOAbTul-RwIQrirajUSVdyI1w9Kh3kjek0vFMw8" // 👈 tu key pública de Supabase
-
+    private val apiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpyb3BlaWlienFlZnpqcmtkenpwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTkwMTc1NDYsImV4cCI6MjA3NDU5MzU0Nn0.ZJWqkOAbTul-RwIQrirajUSVdyI1w9Kh3kjek0vFMw8" //  key pública
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +52,7 @@ class Iniciar_Sesion : AppCompatActivity() {
 
 
         btnimagen.setOnClickListener {
-            val usuario = editNombre.text.toString()
+            usuario = editNombre.text.toString()
             val password = editPassword.text.toString()
             validarUsuario(usuario, password)
         }
@@ -62,28 +66,32 @@ class Iniciar_Sesion : AppCompatActivity() {
 
     }
 
+
     private fun validarUsuario(nombre: String, password: String) {
+        // primero me fijo si el user dejó vacío algún campo
         if (nombre.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "Completa los campos", Toast.LENGTH_SHORT).show()
-            return
+            Toast.makeText(this, "Completa los campos", Toast.LENGTH_SHORT).show() // le digo q ponga sus datos
+            return // y ya no sigo porque no tiene sentido :v
         }
 
-        // Consulta a la tabla "jugadores"
-        val url =
-            "$supabaseUrl/rest/v1/jugadores?nombre_usuario=eq.$nombre&contrasena=eq.$password"
+        // armo la URL para consultar a la Base de Datos (supabase) con el user y pass q puse arriba
+        val url = "$supabaseUrl/rest/v1/jugadores?nombre_usuario=eq.$nombre&contrasena=eq.$password"
 
+        // preparo la petición HTTP con headers
         val request = Request.Builder()
             .url(url)
             .addHeader("apikey", apiKey)
             .addHeader("Authorization", "Bearer $apiKey")
             .build()
 
+        // lanzo la petición
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
+                // si falla el request, o sea, no llega ni a supabase
                 runOnUiThread {
                     Toast.makeText(
                         this@Iniciar_Sesion,
-                        "Error de conexión: ${e.message}",
+                        "Error de conexión: ${e.message}", // lanzo un mensaje q dice error de conexion
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -92,22 +100,35 @@ class Iniciar_Sesion : AppCompatActivity() {
             override fun onResponse(call: Call, response: Response) {
                 val body = response.body?.string()
                 runOnUiThread {
+                    //si stodo salió piola y me devolvió algo con nombre usuario
                     if (response.isSuccessful && body != null && body.contains("nombre_usuario")) {
-                        // Login exitoso
+                        // significa q sí existe el usuario → login ok
                         val intent = Intent(this@Iniciar_Sesion, Perfil::class.java)
-                        intent.putExtra("NOMBRE_USUARIO", nombre)
-                        intent.putExtra("PASSWORD_USUARIO", password)
-                        startActivity(intent)
-                        finish()
+                        intent.putExtra("NOMBRE_USUARIO", nombre) // paso el user
+                        intent.putExtra("PASSWORD_USUARIO", password) // paso el pass
+                        startActivity(intent) // voy a la otra pantalla
+                        finish() // cierro esta
+                        // se necesita el user y pass para poder ver su historila del usuario
+
                     } else {
+                        // si no encontró nada → usuario o pass mal
                         Toast.makeText(
                             this@Iniciar_Sesion,
                             "Usuario o contraseña incorrectos",
                             Toast.LENGTH_SHORT
+                            //lanza un mensaje emergente
                         ).show()
                     }
                 }
             }
         })
     }
+
+
+    fun cargar_datos(view: View){
+        usuario = edit_nombre.text.toString()
+        password = edit_password.text.toString()
+        validarUsuario(usuario, password)
+    }
+
 }
