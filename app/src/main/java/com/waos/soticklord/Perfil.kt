@@ -94,12 +94,11 @@ class Perfil : AppCompatActivity() {
         return nivel
     }
 
-
-
     fun entrar(view: View) {
         val intent = Intent(this, Principal::class.java)
         startActivity(intent)
     }
+
     fun obtenerDatosJugador(idJugador: Int, callback: (Int, Int, Int) -> Unit) {
         val url = "$supabaseUrl/rest/v1/jugadores?id_jugador=eq.$idJugador"
 
